@@ -603,16 +603,16 @@ const transaction = {
 	message: [
 		{
 			address: "UQBcRvmMpgBXbdQkKAWgVTae0WXle47R2B3opTxXewo53BsV", // destination address
-			amount: "2000000000" // Toncoin in nanotons (2 TON)
+			amount: "20000000" // Toncoin in nanotons (2 TON)
 		}
 	]
-}
+};
 
 try {
 	const result = await tonConnectUI.sendTransaction(transaction);
-	console.log("Transaction succesful: ", result);
+	console.log("Transaction succesful:", result);
 } catch (error) {
-	console.error("transaction failed: ", error);
+	console.error("Transaction failed:", error);
 }
 }
 	
