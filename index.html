@@ -568,7 +568,7 @@
 const connectedWallet = await tonConnectUI.getWallets();
 if(connectedWallet){
    isWalletConnected = true;
-   console.log("Wallet is already connected:", connectedWallet);
+   console.log("Wallet is already connected: ", connectedWallet);
 }
 
 		});
@@ -587,7 +587,7 @@ if(connectedWallet){
 					console.log("Wallet connected", connectedWallet);
 				}
 			} catch (error) {
-				console.error("Error connecting to wallet:", error);
+				console.error("Error connecting to wallet: ", error);
 			}
 		}
 
@@ -610,9 +610,9 @@ const transaction = {
 
 try {
 	const result = await tonConnectUI.sendTransaction(transaction);
-	console.log("Transaction succesful:", result);
+	console.log("Transaction succesful: ", result);
 } catch (error) {
-	console.error("transaction failed:", error);
+	console.error("transaction failed: ", error);
 }
 }
 	
