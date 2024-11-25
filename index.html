@@ -607,15 +607,8 @@ const transaction = {
 		}
 	]
 }
-
-try {
-	const result = await tonConnectUI.sendTransaction(transaction);
-	console.log("Transaction succesful:", result);
-} catch (error) {
-	console.error("transaction failed:", error);
 }
-}
-	
+const result = await tonConnectUI.sendTransaction(transaction)
 
 		// Button event listeners
 		document.getElementById("connectWalletBtn").addEventListener("click", connectWallet);
